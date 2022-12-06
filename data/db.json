@@ -1,0 +1,29 @@
+{
+   
+    "users": [
+      {
+        "id": 1,
+        "name": "Ervin Howell",
+        "email": "Ervin@melissa.tv",
+        "phone": "010-692-6593 x09125",
+        "city" :"dhaka"
+        
+      },
+      {
+        "id": 2,
+        "name": "Clementine Bauch",
+        "email": "Nathan@yesenia.net",
+        "phone": "010-692-6593",
+        "city": "McKenziehaven"
+      },
+      {
+        "id": 3,
+        "name": "samanta",
+        "email": "Nathan@gmai.com",
+        "phone": "01378323477",
+        "city": "McKen"
+      }
+       
+    ],
+    "profile": { "name": "typicode" }
+  }
