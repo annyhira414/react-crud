@@ -1,23 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
-export default function Home() {
-  const [empData, empDataChange] = useState();
-  // do the work
-  useEffect(() => {
-    fetch("http://localhost:4000/users")
-      .then((res) => {
-        return res.json();
-      })
-      .then((resp) => {
-        console.log(resp);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
-  return (
-    <>
+   <>
       <div className="w-full h-full flex flex-col px-10 py-8">
         <h1 className="text-black text-3xl font-semibold ">Home Page</h1>
 
@@ -273,39 +254,8 @@ export default function Home() {
                 </td>
               </tr>
 
-              {empData && empData.map((users) => (
-                  <tr key={users.id}>
-                    <td className="py-4 px-6">{users.id}</td>
-                    <td>{users.name}</td>
-                    <td>{users.email}</td>
-                    <td>{users.phone}</td>
-                    <td>{users.city}</td>
-                    <td className="py-4 px-6">
-                      <Link
-                        to="#"
-                        className="font-medium text-blue-600 dark:text-blue-500 hover:underline "
-                      >
-                        Edit
-                      </Link>
-                      <Link
-                        to="#"
-                        className="font-medium text-red-600 dark:text-red-500 hover:underline px-6"
-                      >
-                        Delete
-                      </Link>
-                      <Link
-                        to="#"
-                        className="font-medium text-green-600 dark:text-green-500 hover:underline"
-                      >
-                        Details
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
             </tbody>
           </table>
         </div>
       </div>
     </>
-  );
-}
