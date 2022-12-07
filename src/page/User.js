@@ -4,8 +4,8 @@ import LinkButton from "./LinkButton";
 import Search from "./Search";
 // import Thead from "./Thead";
 
-export default function Home() {
-  const [empData, empDataChange] = useState();
+export default function User() {
+  const [userData, setUserData] = useState();
   // do the work
   useEffect(() => {
     fetch("http://localhost:4000/users")
@@ -13,7 +13,7 @@ export default function Home() {
         return res.json();
       })
       .then((resp) => {
-        empDataChange(resp);
+        setUserData(resp);
       })
       .catch((err) => {
         console.log(err.message);
@@ -51,8 +51,8 @@ export default function Home() {
               </tr>
               <hr/>
               <hr/>
-              {empData &&
-                empData.map((users) => (
+              {userData &&
+                userData.map((users) => (
                   <tr key={users.id}>
                     <td className="py-4 px-6">{users.id}</td>
                     <td>{users.name}</td>

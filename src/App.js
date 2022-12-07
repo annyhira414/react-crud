@@ -1,21 +1,25 @@
 import React from "react";
- //import Home from "./page/Home";
-import User from "./page/User";
+ //import Home from "./page/Home"
 import Navber from "./page/Navber";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Add from "./component/Add";
+import User from "./page/User";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+
 
 function App() {
   return (
     <div className="App">
+       <BrowserRouter>
        <Navber />
-      <BrowserRouter>
-        <Routes>
-          {/* <Route  path="/" element={<Home />} /> */}
-          <Route  path="/" element={<User />} />
-        </Routes>
-      </BrowserRouter>
-     
-    
+      <Routes>
+      <Route path="/" element={<User />} />
+      <Route path="/user" element={<Add />} />
+      </Routes>
+    </BrowserRouter>
     </div>
   );
 }
