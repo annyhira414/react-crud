@@ -1,64 +1,56 @@
 {
-   
-    "users": [
-      {
-        "id": 1,
-        "name": "Ervin Howell",
-        "email": "Ervin@melissa.tv",
-        "phone": "010-692-6593 x09125",
-        "city" :"dhaka"
-        
-      },
-      {
-        "id": 2,
-        "name": "Clementine Bauch",
-        "email": "Nathan@yesenia.net",
-        "phone": "010-692-6593",
-        "city": "McKenziehaven"
-      },
-      {
-        "id": 3,
-        "name": "samanta",
-        "email": "Nathan@gmai.com",
-        "phone": "01378323477",
-        "city": "McKen"
-      },
-      {
-        "id": 4,
-        "name": "Howell",
-        "email": "Ervin@gmail.com",
-        "phone": "029847654423",
-        "city" :"dhaka"
-        
-      }
-      ,
-      {
-        "id": 5,
-        "name": "ellho",
-        "email": "elloh@gmail.com",
-        "phone": "0197654423",
-        "city" : "mirpur"
-        
-      }
-      ,
-      {
-        "id": 6,
-        "name": "hamima",
-        "email":"hamima@gmail.com",
-        "phone": "0198754423",
-        "city" :"London"
-        
-      }
-      ,
-      {
-        "id": 7,
-        "name": "Hol",
-        "email": "Ern@gmail.com",
-        "phone": "017097863",
-        "city" :"Bonani"
-        
-      }
-       
-    ],
-    "profile": { "name": "typicode" }
+  "users": [
+    {
+      "name": "anny",
+      "email": "anny@gmail.com",
+      "phone": "0987654",
+      "city": "efgh",
+      "id": 9
+    },
+    {
+      "name": "annyh",
+      "email": "hi00@gmail.com",
+      "phone": "09876534",
+      "city": "mik",
+      "id": 10
+    },
+    {
+      "name": "dany",
+      "email": "dany@gmail.com",
+      "phone": "01768545367",
+      "city": "kajipara",
+      "id": 11
+    },
+    {
+      "name": "mita",
+      "email": "mita@gmail.com",
+      "phone": "098765",
+      "city": "ghtj",
+      "id": 12
+    },
+    {
+      "name": "huyjhdb",
+      "email": "hi@gmail.com",
+      "phone": "01768545367",
+      "city": "098765",
+      "id": 13
+    },
+    {
+      "name": "dany",
+      "email": "dany@gmail.com",
+      "phone": "019886e73te87",
+      "city": "dkncl.sdzknmc",
+      "id": 14
+    },
+    {
+      "name": "annyh",
+      "email": "mita@gmail.com",
+      "phone": "017680000000",
+      "city": "098765",
+      "id": 15
+    }
+  ],
+  "profile": {
+    "name": "typicode"
   }
+}

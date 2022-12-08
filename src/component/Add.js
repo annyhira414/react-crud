@@ -1,32 +1,32 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Add = () => {
 
+  // const[id, setId] = useState();
   const [personName, setPersonName]= useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [city ,setCity] = useState("");
 
   const navigate=useNavigate();
-  const handelSubmit =((e)=>{
-   e.preventDefault();
-   console.log(personName,email,phone,city);
-    const userData={personName,email,phone,city};
-    fetch("http://localhost:4000/users",{
-      method:"POST",
-      headers:{"content-type":"application/json"},
-      body:JSON.stringify(userData)
-    }).then((res)=>{
-      alert('Saved successfully.')
-      navigate('/');
-    }).catch((err)=>{
-      console.log(err.message)
-  })
-})
+  const data = {
+    // id:id,
+    name: personName,
+    email: email,
+    phone: phone,
+    city: city
+  };
+
+  function submitForm(e) {
+    e.preventDefault();
+    axios.post("http://localhost:4000/users", data).then (alert('Saved successfully.'))(navigate("/"));
+  }
+ 
   return (
     <div>
-      <form onSubmit={handelSubmit}>
+      <form onSubmit={submitForm}>
         <div className=" px-10 py-10 grid md:grid-cols-2 md:gap-6">
           <div className="relative z-10 mb-6 w-full group">
             <input

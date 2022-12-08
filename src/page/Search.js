@@ -1,9 +1,67 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+// import data from 'bd.json';
+// import axios from "axios";
 
-export default function Search() {
+
+export default function Search()
+ {
+    const[data, setData] = useState([]);
+    const[filterVal, setFilterVal] = useState('');
+    const [searchApiData, setSearchApiData] = useState([])
+    useEffect(()=>{
+        const fetchData=()=>{
+            fetch(`http://localhost:4000/users`)
+            .then(response => response.json())
+            .then(json =>{
+                setData(json)
+                setSearchApiData(json)
+            })
+        }
+        fetchData();
+    },[])
+ 
+    const handleFilter=(e)=>{ 
+        if(e.target.value === '') {
+            setData(searchApiData)
+        } else {
+           const filterRes = searchApiData.filter(item =>item.name.toLowerCase().includes(e.target.value.toLowerCase()))
+           setData(filterRes)
+        }
+        setFilterVal(e.target.value)
+    }
+
+
+  // const [value, setvalue]= useState([]);
+  //const [query, setQuery] = useState("");
+  // const [datas, setData] = useState([]);
+
+  // const handelSearch = async (e) => {
+  //   e.preventDefult();
+  //   return await axios
+  //     .get(`http://localhost:4000/users?q=${value}`)
+  //     .then((resp) => {
+  //       setvalue(resp.data);
+  //       setvalue(""); // jeno serch korra por faka hoye jay  
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.message);
+  //     });
+  // };
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const res = await axios.get(`http://localhost:4000?q=${query}`);
+  //     setvalue(res.value);
+  //   };
+  //   if (query.length === 0 || query.length > 2) fetchData();
+  // }, [query]);
+
   return (
+   
     <div>
-         <div className="pb-4 bg-white dark:bg-gray-900">
+         <div className="pb-4 bg-white dark:bg-gray-900"
+        // onChange={(e) => setQuery(e.target.value.toLowerCase())}
+         >
             <label for="table-search" className="sr-only">
               Search
             </label>
@@ -24,6 +82,11 @@ export default function Search() {
                 </svg>
               </div>
               <input
+              // value={value}
+              // onChange={(e) => setvalue(e.target.value)}
+
+              value={filterVal} onInput={(e)=>handleFilter(e)}
+
                 type="text"
                 id="table-search"
                 className="block p-2 pl-10 w-80 text-sm
