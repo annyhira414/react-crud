@@ -1,27 +1,6 @@
 {
   "users": [
     {
-      "name": "anny",
-      "email": "anny@gmail.com",
-      "phone": "0987654",
-      "city": "efgh",
-      "id": 9
-    },
-    {
-      "name": "annyh",
-      "email": "hi00@gmail.com",
-      "phone": "09876534",
-      "city": "mik",
-      "id": 10
-    },
-    {
-      "name": "dany",
-      "email": "dany@gmail.com",
-      "phone": "01768545367",
-      "city": "kajipara",
-      "id": 11
-    },
-    {
       "name": "mita",
       "email": "mita@gmail.com",
       "phone": "098765",

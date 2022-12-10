@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import LinkButton from './LinkButton';
+// import axios from "axios";
+// import LinkButton from "./LinkButton";
+import Delete from '../component/Delete';
 
 export default function SearchFilter() {  
     const[data, setData] = useState([]);
-    const [userData, setUserData] = useState();
+    //const [userData, setUserData] = useState();
 
     const[filterVal, setFilterVal] = useState('');
     const [searchApiData, setSearchApiData] = useState([])
@@ -27,6 +31,8 @@ export default function SearchFilter() {
         }
         setFilterVal(e.target.value)
     }
+// deete 
+
 
   return (
    
@@ -48,12 +54,19 @@ export default function SearchFilter() {
         {
             data.map(item =>{
                 return(
-                    <tr>
-                        {item.name}
-                        {item.phone}
-                        {item.email}
-                        {item.city}
+                    <tr key={item.id}>
+                    <td className="py-4 px-6">{item.id}</td>
 
+                        <td>{item.name}</td>
+                        <td>{item.phone}</td>
+                        <td>{item.email}</td>
+                        <td>{item.city}</td>
+
+                        {/* <LinkButton  deleteUser={deleteUser} userId={item.id}  /> */}
+                    
+                        <LinkButton  />
+                           
+                       
                     </tr>
                 )
             })

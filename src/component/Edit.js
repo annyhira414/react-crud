@@ -2,31 +2,33 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-
 const Edit = () => {
-   const { userId } = useParams();
- 
+  const { userId } = useParams();
+
   const [personName, setPersonName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [city, setCity] = useState("");
+
+  console.log("edite", userId);
  
-
-  console.log("edite",userId);
-
-
-  useEffect(() => {
+  const usework =() => {
     axios.get(`http://localhost:4000/users/${userId}`).then((res) => {
-     
-      console.log('rest', res.data);
-  setPersonName(res.data.name);
-  setEmail(res.data.email);
+      console.log("rest", res.data);
+      setPersonName(res.data.name);
+      setEmail(res.data.email);
       setPhone(res.data.phone);
-       setCity(res.data.city)
-    
-      
+      setCity(res.data.city);
     });
-  }, [userId]);
+  };
+
+  useEffect(()=>{
+    usework();
+  },[]);
+
+  // useEffect(() => {
+  //   loadUser();
+  // }, []);
 
   const navigate = useNavigate();
   const data = {
@@ -46,10 +48,10 @@ const Edit = () => {
 
   return (
     <div>
-      <form >
+      <form>
         <div className=" px-10 py-10 grid md:grid-cols-2 md:gap-6">
           <div className="relative z-10 mb-6 w-full group">
-            <input 
+            <input
               type="text"
               name="floating_email"
               id="floating_email"
@@ -65,7 +67,6 @@ const Edit = () => {
               required
               value={personName}
               onChange={(e) => setPersonName(e.target.value)}
-      
             />
             <label
               for="floating_email"
@@ -160,8 +161,9 @@ const Edit = () => {
           Update 
         </button> */}
 
-      <Link to="/">
-          <button onSubmit={submitForm}
+        <Link to="/">
+          <button
+            onSubmit={submitForm}
             type="button"
             className=" p-2 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4
           focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2
