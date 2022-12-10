@@ -9,42 +9,43 @@ const Edit = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [city, setCity] = useState("");
-
-  console.log("edite", userId);
  
-  const usework =() => {
-    axios.get(`http://localhost:4000/users/${userId}`).then((res) => {
-      console.log("rest", res.data);
-      setPersonName(res.data.name);
-      setEmail(res.data.email);
-      setPhone(res.data.phone);
-      setCity(res.data.city);
+  const [ userData , setUserData] = useState();
+  console.log("edite", userId);
+
+  useEffect(() => {
+    axios.get(`http://localhost:4000/users`).then((res) => {
+      setUserData(res.data);
+
+       console.log("restdata from", res.data);
+      // setPersonName(res.data.name);
+      // setEmail(res.data.email);
+      // setPhone(res.data.phone);
+      // setCity(res.data.city);
     });
-  };
+  }, [userId]);
 
-  useEffect(()=>{
-    usework();
-  },[]);
 
-  // useEffect(() => {
-  //   loadUser();
-  // }, []);
-
-  const navigate = useNavigate();
   const data = {
     name: personName,
     email: email,
     phone: phone,
     city: city,
   };
+  console.log("there", data);
+
+  const navigate = useNavigate();
 
   function submitForm(e) {
     e.preventDefault();
-
+    userData?.map((x)=>x.id === userId?(x.name=data.name,x.email=data.email,x.phone=data.phone,x.city=data.city): "");
+    console.log("userdataaaa",userData);
     axios
-      .put(`http://localhost:4000/users/${userId}`, data)
+      .post(`http://localhost:4000/users`, {data})
       .then(alert("Saved successfully."))(navigate("/"));
+       //console.log("post DAta",(`http://localhost:4000/users/${userId}`, {data}));
   }
+
 
   return (
     <div>
