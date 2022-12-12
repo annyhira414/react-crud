@@ -41,34 +41,7 @@ function App() {
                 <small className="text-danger">{errors.name.message}</small>
               )}
             </div>
-            <div className="form-group">
-              <label className="col-form-label">Age:</label>
-              <input
-                type="text"
-                className={`form-control ${errors.age && "invalid"}`}
-                {...register("age", {
-                  required: "Age is Required",
-                  min: {
-                    value: 13,
-                    message: "Minimum Required age is 13",
-                  },
-                  max: {
-                    value: 65,
-                    message: "Maximum allowed age is 65",
-                  },
-                  pattern: {
-                    value: /^[0-9]*$/,
-                    message: "Only numbers are allowed",
-                  }
-                })}
-                onKeyUp={() => {
-                  trigger("age");
-                }}
-              />
-              {errors.age && (
-                <small className="text-danger">{errors.age.message}</small>
-              )}
-            </div>
+            
             <div className="form-group">
               <label className="col-form-label">Email:</label>
               <input

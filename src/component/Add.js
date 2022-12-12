@@ -2,36 +2,58 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Add = () => {
+// import useForm from '../hooks/useForm';
 
+const Add = () => {
   // const[id, setId] = useState();
-  const [personName, setPersonName]= useState("");
+  const [personName, setPersonName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [city ,setCity] = useState("");
+  const [city, setCity] = useState("");
 
-  const navigate=useNavigate();
-  const data = {
-    // id:id,
-    name: personName,
-    email: email,
-    phone: phone,
-    city: city
-  };
+  const [personNameErr, setPersonNameErr] = useState("");
+
+  const navigate = useNavigate();
 
   function submitForm(e) {
     e.preventDefault();
-    axios.post("http://localhost:4000/users", data).then (alert('Saved successfully.'))(navigate("/"));
-  
-  
-  
+    const data = {
+      // id:id,
+      name: personName,
+      email: email,
+      phone: phone,
+      city: city,
+    };
+    if (personName.length < 4) {
+      setPersonNameErr("Person Name should be atleast 4 characters");
+    } else {
+      setPersonNameErr("");
+      axios.post("http://localhost:4000/users", data).then(alert("Saved successfully."))(navigate("/"));
+    }
   }
- 
+
+  // function formLogin(e) {
+  //   e.preventDefault();
+  //   axios.post("http://localhost:4000/users", data).then (alert('Saved successfully.'))(navigate("/"));
+
+  // }
+
+  // const { handleChange, handleSubmit } = useForm(formLogin);
+  // const nameChange = (e)=>{
+  //   handleChange();
+  //   setPersonName(e.target.value);
+  // }
+  // const emailChange = (e)=>{
+  //   // if (e && e.preventDefault) { e.preventDefault(); }
+  //   handleChange();
+  //   setEmail(e.target.value);
+  // }
+
   return (
     <div>
       <form onSubmit={submitForm}>
-        <div className=" ">
-          <div className="">
+        <div className=" px-10 py-10 grid md:grid-cols-2 md:gap-6">
+          <div className="relative z-10 mb-6 w-full group">
             <input
               type="text"
               name="floating_name"
@@ -45,8 +67,10 @@ const Add = () => {
                 focus:outline-none focus:ring-0
                  focus:border-blue-600 peer"
               placeholder=" "
-              required
-              value={personName} onChange={(e)=>setPersonName(e.target.value)}
+              // required
+              value={personName}
+              onChange={(e) => setPersonName(e.target.value)}
+              // onChange={nameChange}
             />
             <label
               for="floating_name"
@@ -60,6 +84,10 @@ const Add = () => {
               Name
             </label>
           </div>
+          {
+            personNameErr && <p className="text-red-600">{personNameErr}</p>
+            // alert(personNameErr)
+          }
         </div>
 
         <div className="px-10 py-10 grid md:grid-cols-2 md:gap-6">
@@ -77,10 +105,11 @@ const Add = () => {
                 focus:outline-none focus:ring-0
                  focus:border-blue-600 peer"
               placeholder=""
-              required
-              value={email} onChange={(e)=>setEmail(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              // onChange={emailChange}
             />
-           <label
+            <label
               for="floating_email"
               className="peer-focus:font-medium absolute text-sm
                text-gray-500 dark:text-gray-400 
@@ -96,10 +125,10 @@ const Add = () => {
         <div className="  px-10 py-10 grid md:grid-cols-2 md:gap-6">
           <div className="relative z-0 mb-6 w-full group">
             <input
-             type="text"
-             name="floating_email"
-             id="floating_email"
-             className="block py-2.5 px-0 w-full 
+              type="text"
+              name="floating_phone"
+              id="floating_phone"
+              className="block py-2.5 px-0 w-full 
              text-sm text-gray-900 bg-transparent 
              border-0 border-b-2 border-gray-300 
              appearance-none dark:text-black
@@ -108,12 +137,11 @@ const Add = () => {
                focus:outline-none focus:ring-0
                 focus:border-blue-600 peer"
               placeholder=""
-              required
-              value={phone} onChange={(e)=>setPhone(e.target.value)}
-
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
             />
             <label
-              for="floating_email"
+              for="floating_phone"
               className="peer-focus:font-medium absolute text-sm
                text-gray-500 dark:text-gray-400 
                duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0]
@@ -128,10 +156,10 @@ const Add = () => {
         <div className="  px-10 py-10 grid md:grid-cols-2 md:gap-6">
           <div className="relative z-0 mb-6 w-full group">
             <input
-               type="text"
-               name="floating_email"
-               id="floating_email"
-               className="block py-2.5 px-0 w-full 
+              type="text"
+              name="floating_city"
+              id="floating_city"
+              className="block py-2.5 px-0 w-full 
                text-sm text-gray-900 bg-transparent 
                border-0 border-b-2 border-gray-300 
                appearance-none dark:text-black
@@ -140,12 +168,11 @@ const Add = () => {
                  focus:outline-none focus:ring-0
                   focus:border-blue-600 peer"
               placeholder=""
-              required
-              value={city} onChange={(e)=>setCity(e.target.value)}
-
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
             />
             <label
-              for="floating_email"
+              for="floating_city"
               className="peer-focus:font-medium absolute text-sm
                text-gray-500 dark:text-gray-400 
                duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0]
@@ -156,7 +183,7 @@ const Add = () => {
               City
             </label>
           </div>
-          </div>
+        </div>
         <button
           type="submit"
           className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 
@@ -166,19 +193,18 @@ const Add = () => {
         >
           Submit
         </button>
-        
-        <Link to="/"> 
-        
-        <button
-         type="button" 
-         className=" p-2 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4
+
+        <Link to="/">
+          <button
+            type="submit"
+            className=" p-2 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4
           focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2
            dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-           > Back 
-         </button >
-          
+          >
+            {" "}
+            Back
+          </button>
         </Link>
-
       </form>
     </div>
   );
