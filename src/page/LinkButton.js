@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-export default function LinkButton({deleteUser, userId}) {
+export default function LinkButton({deleteUser, userId }) {
   return (
     <div>
       <td className="py-4 px-6">
-        {/* <Link to='/edit' */}
-        <Link
-        to={`/edit/${userId}`}>
+        {/* <Link to='/edit/${userId}'
+           // to={`/editUser/${id}`}>
+        */}
+        <Link to={`/edit/${userId}`} >
           <button className="font-medium text-blue-600 dark:text-blue-500 hover:underline ">
             edit
           </button>

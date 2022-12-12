@@ -1,61 +1,69 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-const Edit = () => {
+const EditUser = () => {
   const { userId } = useParams();
-
-  const [personName, setPersonName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [city, setCity] = useState("");
- 
-  const [ userData , setUserData] = useState();
-  console.log("edite", userId);
-
-  useEffect(() => {
-    axios.get(`http://localhost:4000/users/${userId}`).then((res) => {
-      setUserData(res.data);
-
-       console.log("restdata from", res.data);
-      setPersonName(res.data.name);
-      setEmail(res.data.email);
-      setPhone(res.data.phone);
-      setCity(res.data.city);
-    });
-  }, [userId]);
-
-
-  const data = {
-    name: personName,
-    email: email,
-    phone: phone,
-    city: city,
-  };
-  console.log("there", data);
+  // alert(useId);
+  // const[id, setId] = useState();
+//   const [personName, setPersonName] = useState("");
+//   const [email, setEmail] = useState("");
+//   const [phone, setPhone] = useState("");
+//   const [city, setCity] = useState("");
 
   const navigate = useNavigate();
 
-  function submitForm(e) {
+//   const data = {
+//     // id:id,
+//     name: personName,
+//     email: email,
+//     phone: phone,
+//     city: city,
+//   };
+
+const [user, setUser] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    city: ""
+  });
+
+
+  const { name, email, phone, city } = user;
+  const onInputChange = e => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+  useEffect(() => {
+    loadUser();
+  }, []);
+
+//   const submitForm = async (e) => {
+//     e.preventDefault();
+//     await axios
+//       .post("http://localhost:4000/users", data)
+//       .then(alert("Saved successfully."))(navigate("/"));
+//   };
+
+const onSubmit = async e => {
     e.preventDefault();
+    await axios.put(`http://localhost:4000/users/${userId}`, user)
+    .then(alert("Saved successfully."))(navigate("/"));
+  };
 
-    axios
-      .put(`http://localhost:4000/users/${userId}`, data)
-      .then(res =>{
-       if(res.status === 200 || res.status === 201){
-        navigate('/')
-       }
-      }).catch(err =>{
-        console.log('something went wrong');
-      })
-      // .then(alert("Saved successfully."))(navigate("/"));
-       //console.log("post DAta",(`http://localhost:4000/users/${userId}`, {data}));
-  }
+//   const loadUser = async () => {
+//     const result = await axios.get("http://localhost:4000/users" + useId);
+//     console.log(result);
+//   };
 
+const loadUser = async () => {
+    const result = await axios.get(`http://localhost:3003/users/${userId}`);
+    setUser(result.data);
+  };
 
   return (
-    <div ><h1 className="px-5">edit page</h1>
-      <form onSubmit={submitForm}>
+    <div>
+      {/* <form onSubmit={submitForm}> */}
+        <form onSubmit={e => onSubmit(e)}>
         <div className=" px-10 py-10 grid md:grid-cols-2 md:gap-6">
           <div className="relative z-10 mb-6 w-full group">
             <input
@@ -72,8 +80,10 @@ const Edit = () => {
                  focus:border-blue-600 peer"
               placeholder=" "
               required
-              value={personName}
-              onChange={(e) => setPersonName(e.target.value)}
+            //   value={personName}
+            //   onChange={(e) => setPersonName(e.target.value)}
+            value={name}
+            onChange={e => onInputChange(e)}
             />
             <label
               for="floating_email"
@@ -101,8 +111,10 @@ const Edit = () => {
                 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=""
               required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+            //   value={email}
+            //   onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            onChange={e => onInputChange(e)}
             />
             <label
               for="floating_first_name"
@@ -127,8 +139,10 @@ const Edit = () => {
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=""
               required
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+            //   value={phone}
+            //   onChange={(e) => setPhone(e.target.value)}
+            value={phone}
+            onChange={e => onInputChange(e)}
             />
             <label
               for="floating_last_name"
@@ -148,7 +162,7 @@ const Edit = () => {
               placeholder=""
               required
               value={city}
-              onChange={(e) => setCity(e.target.value)}
+              onChange={e => onInputChange(e)}
             />
             <label
               for="floating_last_name"
@@ -158,19 +172,20 @@ const Edit = () => {
             </label>
           </div>
         </div>
+
+        <Link to="/">
           <button
-            // onSubmit={submitForm}
-            
-            type="submit"
+            type="button"
             className=" p-2 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4
           focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2
            dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
           >
-            Update info
+            update info
           </button>
+        </Link>
       </form>
     </div>
   );
 };
 
-export default Edit;
+export default EditUser;

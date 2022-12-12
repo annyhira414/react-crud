@@ -10,7 +10,10 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+ //import EditUser from "./component/EditUser";
 import Edit from "./component/Edit";
+
+
 
 
 function App() {
@@ -21,9 +24,12 @@ function App() {
       <Routes>
       <Route path="/" element={<User />} />
       <Route path="/user" element={<Add />} />
-      <Route path="/edit/:userId" element={<Edit/>} />
-     <Route path="/details/:userId" element={<Details/>} />
+        <Route path="/edit/:userId" element={<Edit/>} />  
+      {/* <Route path="/editUser/:userId" element={<EditUser/>} /> */}
+      {/* <Route path="/editUser/:userId" element={<EditUser/>} /> */}
+      <Route path="/details/:userId" element={<Details/>} />
       </Routes>
+ 
     </BrowserRouter>
     </div>
   );

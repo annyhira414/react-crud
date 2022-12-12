@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 //import SearchFilter from "./searchFilter";
 
 import LinkButton from "./LinkButton";
@@ -34,10 +34,9 @@ export default function User() {
 
   // fro search
 
-  const qurey = (userData)=>{
-
-    return userData.filter((item)=>item.name.toLowerCase().includes(search))
-  }
+  const qurey = (userData) => {
+    return userData.filter((item) => item.name.toLowerCase().includes(search));
+  };
 
   return (
     <>
@@ -73,7 +72,6 @@ export default function User() {
               <input
                 //  value={value}
                 onChange={(e) => setSearch(e.target.value)}
-
                 // value={filterVal} onInput={(e)=>handleFilter(e)}
 
                 type="text"
@@ -113,30 +111,32 @@ export default function User() {
               <hr />
               <hr />
               {/* {userData && */}
-              {search?(
-                qurey(userData)?.map((users) => (
-                  <tr key={users.id}>
-                    <td className="py-4 px-6">{users.id}</td>
-                    <td>{users.name}</td>
-                    <td>{users.email}</td>
-                    <td>{users.phone}</td>
-                    <td>{users.city}</td>
+              {search
+                ? qurey(userData)?.map((users) => (
+                    <tr key={users.id}>
+                      <td className="py-4 px-6">{users.id}</td>
+                      <td>{users.name}</td>
+                      <td>{users.email}</td>
+                      <td>{users.phone}</td>
+                      <td>{users.city}</td>
 
-                    <LinkButton deleteUser={deleteUser} userId={users.id} />
-                  </tr>
-                ))):(userData?.map((users) => (
-                  <tr key={users.id}>
-                    <td className="py-4 px-6">{users.id}</td>
-                    <td>{users.name}</td>
-                    <td>{users.email}</td>
-                    <td>{users.phone}</td>
-                    <td>{users.city}</td>
-
-                    <LinkButton deleteUser={deleteUser} userId={users.id} />
-                
-                  </tr>
-                      )))
-                }
+                      <LinkButton deleteUser={deleteUser} userId={users.id} />
+                    </tr>
+                  ))
+                : userData?.map((users) => (
+                    <tr key={users.id}>
+                      <td className="py-4 px-6">{users.id}</td>
+                      <td>{users.name}</td>
+                      <td>{users.email}</td>
+                      <td>{users.phone}</td>
+                      <td>{users.city}</td>
+                      <td className="py-4 px-8">
+                      
+                      <LinkButton deleteUser={deleteUser} userId={users.id} />
+                      </td>
+                     
+                    </tr>
+                  ))}
             </thead>
           </table>
         </div>
